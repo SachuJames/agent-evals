@@ -17,6 +17,11 @@ dependencies = [
     "jsonschema>=4.0",
 ]
 
+[project.urls]
+Homepage = "https://github.com/SachuJames/agent-evals"
+Repository = "https://github.com/SachuJames/agent-evals"
+Issues = "https://github.com/SachuJames/agent-evals/issues"
+
 [project.optional-dependencies]
 dev = ["pytest>=8.0", "ruff>=0.8", "mypy>=1.0"]
 
@@ -26,6 +31,9 @@ agent-evals = "agent_evals.cli:main"
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["agent_evals*"]
+
+[tool.setuptools.package-data]
+agent_evals = ["builtin_tasks/*.yaml"]
 
 [tool.ruff]
 line-length = 100
