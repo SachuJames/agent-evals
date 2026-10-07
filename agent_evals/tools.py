@@ -6,6 +6,7 @@ import abc
 import ast
 import math
 import operator
+from collections.abc import Callable
 
 
 class Tool(abc.ABC):
@@ -16,7 +17,7 @@ class Tool(abc.ABC):
     parameters: dict = {}
 
     @abc.abstractmethod
-    def execute(self, args: dict, ctx: "ToolContext") -> str:
+    def execute(self, args: dict, ctx: ToolContext) -> str:
         """Run the tool. Return a string that is fed back to the agent."""
 
 
@@ -28,7 +29,7 @@ class ToolContext:
         self.fetch_stubs: dict[str, str] = dict(fetch_stubs or {})
 
 
-_SAFE_BINOPS = {
+_SAFE_BINOPS: dict[type, Callable[[float, float], float]] = {
     ast.Add: operator.add,
     ast.Sub: operator.sub,
     ast.Mult: operator.mul,
@@ -37,8 +38,11 @@ _SAFE_BINOPS = {
     ast.Mod: operator.mod,
     ast.Pow: operator.pow,
 }
-_SAFE_UNARYOPS = {ast.UAdd: operator.pos, ast.USub: operator.neg}
-_SAFE_FUNCS = {
+_SAFE_UNARYOPS: dict[type, Callable[[float], float]] = {
+    ast.UAdd: operator.pos,
+    ast.USub: operator.neg,
+}
+_SAFE_FUNCS: dict[str, Callable[..., float]] = {
     "sqrt": math.sqrt,
     "abs": abs,
     "round": round,

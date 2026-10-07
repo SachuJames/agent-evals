@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import time
 
-from agent_evals.models import StepRecord, TaskResult, TaskSpec, now
+from agent_evals.models import RunResult, StepRecord, TaskResult, TaskSpec, new_run_id, now
 from agent_evals.runners import AgentRunner
 from agent_evals.scorers import score_task
 from agent_evals.tools import REGISTRY, ToolContext
@@ -124,10 +124,8 @@ def run_suite(
     runner: AgentRunner,
     suite_name: str = "builtin",
     judge=None,
-) -> "RunResult":
+) -> RunResult:
     """Run every task in a suite with the same runner."""
-    from agent_evals.models import RunResult, new_run_id
-
     run = RunResult(run_id=new_run_id(), suite=suite_name, runner=runner.name, started_at=now())
     for task in tasks:
         run.task_results.append(run_task(task, runner, judge=judge))

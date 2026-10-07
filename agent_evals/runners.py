@@ -106,7 +106,9 @@ class HttpRunner(AgentRunner):
         payload = {
             "model": self.model,
             "messages": messages,
-            "tools": [tool_module.openai_tool_schema(t) for t in tool_module.registry_for(task.tools)],
+            "tools": [
+                tool_module.openai_tool_schema(t) for t in tool_module.registry_for(task.tools)
+            ],
             "tool_choice": "auto",
         }
         headers = {"Content-Type": "application/json"}
