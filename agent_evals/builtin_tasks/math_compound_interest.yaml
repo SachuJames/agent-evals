@@ -1,0 +1,16 @@
+id: math_compound_interest
+name: Compound interest
+category: math
+prompt: |
+  A savings account starts with $1000 and earns 5% annual interest, compounded yearly.
+  After 2 years, what is the balance? Use the calculator tool if you want.
+  Respond with only the number, rounded to 2 decimals.
+tools: [calculator]
+max_steps: 5
+scoring:
+  - type: exact_match
+    expected: "1102.50"
+mock_script:
+  - tool: calculator
+    args: {expression: "1000 * 1.05 ** 2"}
+  - final: "1102.50"

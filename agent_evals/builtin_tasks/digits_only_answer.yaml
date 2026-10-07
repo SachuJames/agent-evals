@@ -1,0 +1,14 @@
+id: digits_only_answer
+name: Digits only
+category: instruction_following
+prompt: |
+  What is 7 * 8? Respond with only the digits of the answer, no other characters.
+tools: []
+max_steps: 3
+scoring:
+  - type: regex
+    pattern: '^\d+$'
+  - type: exact_match
+    expected: "56"
+mock_script:
+  - final: "56"

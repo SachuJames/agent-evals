@@ -1,0 +1,15 @@
+id: logic_mislabeled_boxes
+name: Mislabeled boxes
+category: reasoning
+prompt: |
+  Three boxes labeled "Apples", "Oranges", and "Mixed" are all mislabeled:
+  no label matches its contents. You may take one fruit from exactly one box.
+  From which box's label should you draw to correctly relabel all three?
+  Respond with only the label of the box.
+tools: []
+max_steps: 3
+scoring:
+  - type: exact_match
+    expected: "Mixed"
+mock_script:
+  - final: "Mixed"

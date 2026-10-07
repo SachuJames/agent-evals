@@ -1,0 +1,18 @@
+id: chained_calc
+name: Chained calculation
+category: tool_use
+prompt: |
+  A store sells notebooks for $4.50 each. A customer buys 6 notebooks and a 10%
+  discount is applied to the total. What does the customer pay?
+  Respond with only the number, rounded to 2 decimals.
+tools: [calculator]
+max_steps: 8
+scoring:
+  - type: exact_match
+    expected: "24.30"
+mock_script:
+  - tool: calculator
+    args: {expression: "4.50 * 6"}
+  - tool: calculator
+    args: {expression: "27.0 * 0.9"}
+  - final: "24.30"

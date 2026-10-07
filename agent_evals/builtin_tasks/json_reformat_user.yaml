@@ -1,0 +1,21 @@
+id: json_reformat_user
+name: Reformat user record
+category: extraction
+prompt: |
+  Convert this record into JSON with keys: name (string), age (integer), active (boolean).
+  Respond with only the JSON object.
+
+  Record: name=Ada Lovelace; age=36; active=yes
+tools: []
+max_steps: 3
+scoring:
+  - type: json_schema
+    schema:
+      type: object
+      required: [name, age, active]
+      properties:
+        name: {type: string, const: "Ada Lovelace"}
+        age: {type: integer, const: 36}
+        active: {type: boolean, const: true}
+mock_script:
+  - final: '{"name": "Ada Lovelace", "age": 36, "active": true}'

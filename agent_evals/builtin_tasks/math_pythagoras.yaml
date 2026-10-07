@@ -1,0 +1,15 @@
+id: math_pythagoras
+name: Pythagoras
+category: math
+prompt: |
+  A right triangle has legs of length 9 and 12. What is the length of the hypotenuse?
+  Use the calculator tool if you want. Respond with only the number.
+tools: [calculator]
+max_steps: 5
+scoring:
+  - type: exact_match
+    expected: "15"
+mock_script:
+  - tool: calculator
+    args: {expression: "(9**2 + 12**2) ** 0.5"}
+  - final: "15"

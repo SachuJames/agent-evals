@@ -1,0 +1,22 @@
+id: json_extract_order
+name: Extract order JSON
+category: extraction
+prompt: |
+  Read the following message and extract the order as JSON with exactly these keys:
+  order_id (string), total (number), items (array of strings).
+  Respond with only the JSON object, no other text.
+
+  Message: "Hi, confirming order ORD-8812: 1 widget and 1 gadget for a total of $59.97. Thanks!"
+tools: []
+max_steps: 3
+scoring:
+  - type: json_schema
+    schema:
+      type: object
+      required: [order_id, total, items]
+      properties:
+        order_id: {type: string, const: "ORD-8812"}
+        total: {type: number, const: 59.97}
+        items: {type: array, items: {type: string}, minItems: 2}
+mock_script:
+  - final: '{"order_id": "ORD-8812", "total": 59.97, "items": ["widget", "gadget"]}'

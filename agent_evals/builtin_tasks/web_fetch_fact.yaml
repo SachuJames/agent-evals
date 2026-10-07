@@ -1,0 +1,17 @@
+id: web_fetch_fact
+name: Fetch then answer
+category: tool_use
+prompt: |
+  Use the web_fetch tool to read https://example.com/mission and answer:
+  in which year does the Ares-7 mission launch? Respond with only the year.
+tools: [web_fetch]
+max_steps: 5
+fetch_stubs:
+  https://example.com/mission: "Program update: our Mars mission, Ares-7, launches in 2029 from Kourou."
+scoring:
+  - type: exact_match
+    expected: "2029"
+mock_script:
+  - tool: web_fetch
+    args: {url: "https://example.com/mission"}
+  - final: "2029"

@@ -1,0 +1,19 @@
+id: kv_store_recall
+name: Store then recall
+category: tool_use
+prompt: |
+  Use the kv_store tool to store the number 17 under key "a" and the number 25
+  under key "b". Then add them together and respond with only the sum.
+tools: [calculator, kv_store]
+max_steps: 8
+scoring:
+  - type: exact_match
+    expected: "42"
+mock_script:
+  - tool: kv_store
+    args: {op: "set", key: "a", value: "17"}
+  - tool: kv_store
+    args: {op: "set", key: "b", value: "25"}
+  - tool: calculator
+    args: {expression: "17 + 25"}
+  - final: "42"

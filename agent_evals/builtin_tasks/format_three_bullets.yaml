@@ -1,0 +1,13 @@
+id: format_three_bullets
+name: Exactly three bullets
+category: instruction_following
+prompt: |
+  List exactly three planets of the solar system, one per line.
+  Each line must start with "- ". No other text before, between, or after the lines.
+tools: []
+max_steps: 3
+scoring:
+  - type: regex
+    pattern: '^(- [^\n]+\n){2}- [^\n]+$'
+mock_script:
+  - final: "- Mars\n- Venus\n- Jupiter"
