@@ -11,3 +11,6 @@ build/
 .mypy_cache/
 .ruff_cache/
 htmlcov/
+.agent-evals/
+demo-report.html
+demo-trace.jsonl
