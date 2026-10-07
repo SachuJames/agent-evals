@@ -150,9 +150,7 @@ def diff_cmd(run_a, run_b, db):
     click.echo(f"avg score: {d['avg_a']:.2f} -> {d['avg_b']:.2f} (delta {d['avg_delta']:+.2f})")
     for pt in d["per_task"]:
         arrow = "^" if pt["delta"] > 0 else ("v" if pt["delta"] < 0 else "=")
-        click.echo(
-            f"  [{arrow}] {pt['task_id']:28s} {pt['score_a']:.2f} -> {pt['score_b']:.2f}"
-        )
+        click.echo(f"  [{arrow}] {pt['task_id']:28s} {pt['score_a']:.2f} -> {pt['score_b']:.2f}")
     if d["regressed"]:
         click.echo(f"regressed: {', '.join(d['regressed'])}")
     if d["improved"]:

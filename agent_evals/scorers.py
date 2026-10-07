@@ -79,7 +79,9 @@ class StubJudge(Judge):
         return 1.0, "all rubric keywords present"
 
 
-def score_check(check: CheckSpec, answer: str, task: TaskSpec, judge: Judge | None) -> tuple[float, str]:
+def score_check(
+    check: CheckSpec, answer: str, task: TaskSpec, judge: Judge | None
+) -> tuple[float, str]:
     """Score one check. Returns (score, detail string)."""
     t = check.type
     if t == "exact_match":
@@ -105,9 +107,7 @@ def score_check(check: CheckSpec, answer: str, task: TaskSpec, judge: Judge | No
     raise ValueError(f"unknown check type: {t!r}")
 
 
-def score_task(
-    task: TaskSpec, answer: str, judge: Judge | None = None
-) -> tuple[float, list[dict]]:
+def score_task(task: TaskSpec, answer: str, judge: Judge | None = None) -> tuple[float, list[dict]]:
     """Score every check in a task; return (weighted average, per-check details)."""
     details: list[dict] = []
     total_weight = 0.0

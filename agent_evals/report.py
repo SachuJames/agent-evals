@@ -15,9 +15,11 @@ margin:0;background:#0d1117;color:#e6edf3}
 h1{font-size:28px;margin:0 0 4px}h2{font-size:20px;margin:32px 0 12px}
 .sub{color:#8b949e;margin-bottom:24px}
 .cards{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:8px}
-.card{background:#161b22;border:1px solid #30363d;border-radius:10px;padding:16px 20px;min-width:150px}
+.card{background:#161b22;border:1px solid #30363d;border-radius:10px;
+padding:16px 20px;min-width:150px}
 .card .v{font-size:26px;font-weight:700}.card .l{color:#8b949e;font-size:12px;margin-top:4px}
-table{width:100%;border-collapse:collapse;background:#161b22;border:1px solid #30363d;border-radius:10px;overflow:hidden}
+table{width:100%;border-collapse:collapse;background:#161b22;
+border:1px solid #30363d;border-radius:10px;overflow:hidden}
 th,td{text-align:left;padding:10px 14px;border-bottom:1px solid #21262d;font-size:14px}
 th{color:#8b949e;font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.04em}
 tr:last-child td{border-bottom:none}
@@ -27,15 +29,18 @@ tr:last-child td{border-bottom:none}
 details{background:#161b22;border:1px solid #30363d;border-radius:10px;margin:10px 0}
 summary{padding:12px 16px;cursor:pointer;font-size:14px}
 .step{padding:10px 16px;border-top:1px solid #21262d;font-size:13px}
-.step pre{background:#0d1117;padding:10px;border-radius:6px;overflow-x:auto;white-space:pre-wrap}
-.tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:12px;background:#21262d;color:#8b949e;margin-right:6px}
+.step pre{background:#0d1117;padding:10px;border-radius:6px;
+overflow-x:auto;white-space:pre-wrap}
+.tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:12px;
+background:#21262d;color:#8b949e;margin-right:6px}
 .delta-up{color:#3fb950}.delta-dn{color:#f85149}
 """
 
 _SUMMARY = """
 <div class="wrap">
 <h1>agent-evals run report</h1>
-<div class="sub">run <b>{run_id}</b> &middot; suite {suite} &middot; runner {runner} &middot; {when}</div>
+<div class="sub">run <b>{run_id}</b> &middot; suite {suite} &middot;
+runner {runner} &middot; {when}</div>
 <div class="cards">
 <div class="card"><div class="v">{passed}/{total}</div><div class="l">tasks passed</div></div>
 <div class="card"><div class="v">{avg:.0%}</div><div class="l">average score</div></div>
@@ -127,9 +132,7 @@ def render_report(
     """Render the full HTML report for one run, optionally with a diff."""
     when = datetime.fromtimestamp(run_summary["started_at"]).strftime("%Y-%m-%d %H:%M:%S")
     total_steps = sum(len(v) for v in (traces or {}).values())
-    avg = (
-        sum(t["score"] for t in task_results) / len(task_results) if task_results else 0.0
-    )
+    avg = sum(t["score"] for t in task_results) / len(task_results) if task_results else 0.0
     passed = sum(1 for t in task_results if t["passed"])
     body = _SUMMARY.format(
         run_id=_esc(run_summary["id"]),

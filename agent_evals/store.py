@@ -60,7 +60,8 @@ class RunStore:
     def save_run(self, run: RunResult, config: dict | None = None) -> None:
         cur = self.conn.cursor()
         cur.execute(
-            "INSERT OR REPLACE INTO runs (id, started_at, suite, runner, config) VALUES (?,?,?,?,?)",
+            "INSERT OR REPLACE INTO runs "
+            "(id, started_at, suite, runner, config) VALUES (?,?,?,?,?)",
             (run.run_id, run.started_at, run.suite, run.runner, json.dumps(config or {})),
         )
         for tr in run.task_results:
@@ -83,7 +84,8 @@ class RunStore:
             for st in tr.steps:
                 cur.execute(
                     """INSERT INTO steps
-                       (run_id, task_id, seq, role, content, tool_name, tool_args, tool_result, latency_ms)
+                       (run_id, task_id, seq, role, content, tool_name,
+                        tool_args, tool_result, latency_ms)
                        VALUES (?,?,?,?,?,?,?,?,?)""",
                     (
                         run.run_id,
