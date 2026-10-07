@@ -30,4 +30,6 @@ jobs:
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           repository-url: https://pypi.pkg.github.com/SachuJames
+          user: SachuJames
+          password: ${{ secrets.GITHUB_TOKEN }}
           skip-existing: true
