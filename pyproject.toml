@@ -3,7 +3,7 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "evals-kit"
+name = "trialrun"
 version = "0.1.0"
 description = "Eval harness for AI agents: YAML task suites, pluggable runners, tool-use loop, scorers, trace capture, regression tracking"
 readme = "README.md"
